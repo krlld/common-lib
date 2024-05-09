@@ -9,15 +9,13 @@ import java.util.Optional;
 
 public interface RepositoryService<E, I> {
 
-    E create(E entity);
+    E save(E entity);
 
-    Iterable<E> createAll(Iterable<E> entities);
+    Iterable<E> saveAll(Iterable<E> entities);
 
-    Optional<E> find(I id);
+    Optional<E> findById(I id);
 
-    E update(E entity);
-
-    void delete(I id);
+    void deleteById(I id);
 
     List<E> findList(FilterRequest filter);
 

@@ -22,19 +22,19 @@ public abstract class AbstractService<E, D, I> implements ServiceInterface<D, I>
 
     @Override
     @Transactional
-    public D create(D dto) {
+    public D save(D dto) {
         E entity = mapperService.toEntity(dto);
-        repositoryService.create(entity);
+        repositoryService.save(entity);
         return mapperService.toDto(entity);
     }
 
     @Override
     @Transactional
-    public Iterable<D> createAll(Iterable<D> dtos) {
+    public Iterable<D> saveAll(Iterable<D> dtos) {
         Iterable<E> entities = StreamSupport.stream(dtos.spliterator(), false)
                 .map(mapperService::toEntity)
                 .collect(Collectors.toList());
-        entities = repositoryService.createAll(entities);
+        entities = repositoryService.saveAll(entities);
         return StreamSupport.stream(entities.spliterator(), false)
                 .map(mapperService::toDto)
                 .collect(Collectors.toList());
@@ -42,24 +42,16 @@ public abstract class AbstractService<E, D, I> implements ServiceInterface<D, I>
 
     @Override
     @Transactional(readOnly = true)
-    public D find(I id) {
-        return repositoryService.find(id)
+    public D findById(I id) {
+        return repositoryService.findById(id)
                 .map(mapperService::toDto)
                 .orElseThrow(() -> new NotFoundException("id = " + id + " not found"));
     }
 
     @Override
     @Transactional
-    public D update(D dto) {
-        E entity = mapperService.toEntity(dto);
-        repositoryService.create(entity);
-        return mapperService.toDto(entity);
-    }
-
-    @Override
-    @Transactional
-    public void delete(I id) {
-        repositoryService.delete(id);
+    public void deleteById(I id) {
+        repositoryService.deleteById(id);
     }
 
     @Override

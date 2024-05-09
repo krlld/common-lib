@@ -20,31 +20,25 @@ public abstract class AbstractRepositoryService<E, I> implements RepositoryServi
 
     @Override
     @Transactional
-    public E create(E entity) {
+    public E save(E entity) {
         return repository.save(entity);
     }
 
     @Override
     @Transactional
-    public Iterable<E> createAll(Iterable<E> entities) {
+    public Iterable<E> saveAll(Iterable<E> entities) {
         return repository.saveAll(entities);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<E> find(I id) {
+    public Optional<E> findById(I id) {
         return repository.findById(id);
     }
 
     @Override
     @Transactional
-    public E update(E entity) {
-        return repository.save(entity);
-    }
-
-    @Override
-    @Transactional
-    public void delete(I id) {
+    public void deleteById(I id) {
         repository.deleteById(id);
     }
 

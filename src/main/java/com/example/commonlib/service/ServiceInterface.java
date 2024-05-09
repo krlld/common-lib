@@ -8,15 +8,13 @@ import java.util.List;
 
 public interface ServiceInterface<D, I> {
 
-    D create(D entity);
+    D save(D entity);
 
-    Iterable<D> createAll(Iterable<D> dtos);
+    Iterable<D> saveAll(Iterable<D> dtos);
 
-    D find(I id);
+    D findById(I id);
 
-    D update(D dto);
-
-    void delete(I id);
+    void deleteById(I id);
 
     List<D> findList(FilterRequest filter);
 
