@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface ServiceInterface<D, I> {
 
-    D save(D entity);
+    D save(D dto);
 
     Iterable<D> saveAll(Iterable<D> dtos);
 
